@@ -32,3 +32,10 @@
 
 ### Материалы к размышлению:
 - [Документация API StackOverflow](https://api.stackexchange.com/docs/search)
+
+
+## Использование
+## Разработка
+```shell
+clojure -M:dev
+```
