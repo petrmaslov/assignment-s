@@ -1,6 +1,7 @@
 (ns app.core.server
   "Web server."
   (:require
+    [app.core.web :as web]
     [bidi.ring :refer [make-handler]]
     [cheshire.core :as json]
     [ring.adapter.jetty :as jetty]
@@ -16,11 +17,11 @@
   [request]
   {:status  200
    :headers {"Content-type" "application/json;charset=utf-8"}
-   :body    (json/generate-string
-              {:header  "Hello!"
-               :tags (let [tags (:tag (:params request))]
-                       (if (string? tags) [tags] tags))}
-              {:pretty true})})
+   :body    (let [tags (:tag (:params request))
+                  tags (if (string? tags) [tags] tags)]
+              (-> :stackoverflow
+                (web/get-statistic-by-tags tags)
+                (json/generate-string {:pretty true})))})
 
 
 (defn not-found
