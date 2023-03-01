@@ -1,6 +1,7 @@
 {:paths ["src" "resources"]
  :deps {bidi/bidi {:mvn/version "2.1.6"}
         cheshire/cheshire {:mvn/version "5.11.0"}
+        clj-http/clj-http {:mvn/version "3.12.3"}
         org.clojure/clojure {:mvn/version "1.11.1"}
         ring/ring-core {:mvn/version "1.9.6"}
         ring/ring-jetty-adapter {:mvn/version "1.9.6"}}
