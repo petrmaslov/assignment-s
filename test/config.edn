@@ -1,0 +1,7 @@
+{:port 3434
+ :fake-api {:uri "http://localhost:3434/search"
+            :tags "tagged"
+            :delay 1000
+            :timeout 5000
+            :max-parallel 2
+            :opts {}}}
