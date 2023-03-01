@@ -11,4 +11,9 @@
                       nrepl/nrepl {:mvn/version "1.1.0-alpha1"}
                       org.clojure/tools.namespace {:mvn/version "1.4.1"}}
         :main-opts   ["-m" "nrepl.cmdline"]}
-  :run {:exec-fn app.main/-main}}}
+  :run {:exec-fn app.main/-main}
+  :test {:extra-paths ["test"]
+         :extra-deps  {io.github.cognitect-labs/test-runner {:git/tag "v0.5.1", :git/sha "dfb30dd"}
+                       hashp/hashp {:mvn/version "0.2.2"}}
+         :main-opts   ["-m" "cognitect.test-runner"]
+         :exec-fn     cognitect.test-runner.api/test}}}
