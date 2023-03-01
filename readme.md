@@ -52,5 +52,5 @@ clojure -T:build
 
 ## Запуск
 ```shell
-java -jar target/assignment-0.0.15-standalone.jar
+java -jar target/assignment-0.0.16-standalone.jar
 ```
