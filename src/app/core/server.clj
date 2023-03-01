@@ -2,6 +2,7 @@
   "Web server."
   (:require
     [bidi.ring :refer [make-handler]]
+    [cheshire.core :as json]
     [ring.adapter.jetty :as jetty]
     [ring.middleware.keyword-params :refer [wrap-keyword-params]]
     [ring.middleware.params :refer [wrap-params]]))
@@ -14,8 +15,12 @@
   "The once handler of service. It passes request and returns response's map."
   [request]
   {:status  200
-   :headers {"Content-type" "text/html;charset=utf-8"}
-   :body    (format "<h1>Hello!</h1><div>%s</div>" request)})
+   :headers {"Content-type" "application/json;charset=utf-8"}
+   :body    (json/generate-string
+              {:header  "Hello!"
+               :tags (let [tags (:tag (:params request))]
+                       (if (string? tags) [tags] tags))}
+              {:pretty true})})
 
 
 (defn not-found
