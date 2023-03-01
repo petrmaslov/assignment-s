@@ -1,0 +1,10 @@
+{:port 8080
+ :stackoverflow {:uri "https://api.stackexchange.com/2.2/search"
+                 :tags "tagged"
+                 :delay 1000
+                 :timeout 5000
+                 :max-parallel 3
+                 :opts {:site "stackoverflow"
+                        :pagesize 100
+                        :order "desc"
+                        :sort "creation"}}}

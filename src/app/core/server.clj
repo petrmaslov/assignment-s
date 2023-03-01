@@ -1,6 +1,7 @@
 (ns app.core.server
   "Web server."
   (:require
+    [app.core.config :as config]
     [app.core.web :as web]
     [bidi.ring :refer [make-handler]]
     [cheshire.core :as json]
@@ -50,12 +51,14 @@
 
 (defn start-server!
   "Runs Jetty server."
-  [{:keys [port]
-    :or   {port 8080}
-    :as opts}]
+  [{:as opts}]
   (when (nil? @server)
-    (reset! server (jetty/run-jetty #'app {:port port, :join? false}))
-    (println (format "[server] Started on port %s." port))))
+    (let [{:keys [port] :as options} (merge
+                                       {:port  (:port (config/get))
+                                        :join? false}
+                                       opts)]
+      (reset! server (jetty/run-jetty #'app options))
+      (println (format "[server] Started on port %s." port)))))
 
 
 (defn stop-server!
