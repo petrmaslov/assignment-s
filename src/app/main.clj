@@ -1,8 +1,10 @@
 (ns app.main
   "The default namespace for a project."
-  (:gen-class))
+  (:gen-class)
+  (:require
+    [app.core.server :as server]))
 
 
 (defn -main
   [& {:as opts}]
-  (println "Welcome to the Main."))
+  (server/start-server! opts))
