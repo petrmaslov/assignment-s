@@ -12,7 +12,7 @@
 (defonce server (atom nil))
 
 
-(defn main-page
+(defn stackoverflow-api-search
   "The once handler of service. It passes request and returns response's map."
   [request]
   {:status  200
@@ -35,7 +35,7 @@
 (def ^{:private true
        :doc "Routes of application."}
   routes
-  ["/" {"search" {:get #'main-page}
+  ["/" {"search" {:get #'stackoverflow-api-search}
         true #'not-found}])
 
 
