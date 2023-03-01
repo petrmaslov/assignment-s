@@ -39,3 +39,8 @@
 ```shell
 clojure -M:dev
 ```
+
+## Запуск
+```shell
+clojure -X:run
+```

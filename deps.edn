@@ -5,4 +5,5 @@
         :extra-deps  {hashp/hashp {:mvn/version "0.2.2"}
                       nrepl/nrepl {:mvn/version "1.1.0-alpha1"}
                       org.clojure/tools.namespace {:mvn/version "1.4.1"}}
-        :main-opts   ["-m" "nrepl.cmdline"]}}}
+        :main-opts   ["-m" "nrepl.cmdline"]}
+  :run {:exec-fn app.main/-main}}}
