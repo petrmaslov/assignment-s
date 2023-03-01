@@ -57,13 +57,35 @@
         :message "Incorrect. Use URI-query like: `.../search?tag=<tag>..."}))))
 
 
+(defn expand-tags
+  "Returns map with a statistic for each tag."
+  [{:keys [tags answer_count]}]
+  (for [tag tags]
+    {:tag tag
+     :answered answer_count}))
+
+
+(defn prepare-data
+  "Returns a list of maps, where an each map is a statistic of answers."
+  [data]
+  (->> data
+    (walk/keywordize-keys)
+    (map :items)
+    (flatten)
+    (map expand-tags)
+    (flatten)))
+
+
 (defn get-statistic-by-tags
   "Returns a map, where the keys are the tags from the questions on the passed topic, and the values are the maps with statistic for answers."
   [api-name tags & {:as opts}]
   (let [data (read-api-in-order api-name tags opts)]
     (if (:error? data)
       data
-      {:api-name api-name
-       :tags tags
-       :opts opts
-       :data data})))
+      (->> data
+        (prepare-data)
+        (group-by :tag)
+        (map (fn [[tag answers]]
+               {tag {:total    (count answers)
+                     :answered (->> answers (map :answered) (apply +))}}))
+        (apply merge)))))
