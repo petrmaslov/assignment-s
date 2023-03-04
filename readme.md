@@ -45,6 +45,11 @@ clojure -M:dev
 clojure -X:run
 ```
 
+## Тестирование
+```shell
+clojure -X:test
+```
+
 ## Сборка
 ```shell
 clojure -T:build
@@ -52,5 +57,5 @@ clojure -T:build
 
 ## Запуск
 ```shell
-java -jar target/assignment-0.0.16-standalone.jar
+java -jar target/assignment-0.0.17-standalone.jar
 ```
